@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"strings"
 
-	"fcxlabs-git.ferreiracosta.com/go-apps/pkg/fclogger"
 )
 
 type Header struct {
@@ -21,7 +20,6 @@ func Post(url, body string, headers ...Header) (*http.Response, error) {
 	bodyBytes := strings.NewReader(body)
 	rq, err := http.NewRequest(http.MethodPost, url, bodyBytes)
 	if err != nil {
-		fclogger.Error("error while creating request", fclogger.Errs, err)
 		return nil, err
 	}
 
@@ -30,7 +28,6 @@ func Post(url, body string, headers ...Header) (*http.Response, error) {
 	}
 	res, err := http.DefaultClient.Do(rq)
 	if err != nil {
-		fclogger.Error("error while sending request", fclogger.Errs, err)
 		return nil, err
 	}
 	return res, nil
@@ -43,7 +40,6 @@ func PostWithBasicAuth(url, body, username, password string, headers ...Header) 
 	bodyBytes := strings.NewReader(body)
 	rq, err := http.NewRequest(http.MethodPost, url, bodyBytes)
 	if err != nil {
-		fclogger.Error("error while creating request", fclogger.Errs, err)
 		return nil, err
 	}
 	rq.SetBasicAuth(username, password)
@@ -52,7 +48,6 @@ func PostWithBasicAuth(url, body, username, password string, headers ...Header) 
 	}
 	res, err := http.DefaultClient.Do(rq)
 	if err != nil {
-		fclogger.Error("error while sending request", fclogger.Errs, err)
 		return nil, err
 	}
 
@@ -74,7 +69,6 @@ func Get(url string, headers ...Header) (*http.Response, error) {
 	// // method := "fcrequests.Get"
 	rq, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		fclogger.Debug("error while creating request", fclogger.Errs, err)
 		return nil, err
 	}
 
@@ -83,7 +77,6 @@ func Get(url string, headers ...Header) (*http.Response, error) {
 	}
 	res, err := http.DefaultClient.Do(rq)
 	if err != nil {
-		fclogger.Debug("error while sending request", fclogger.Errs, err)
 		return nil, err
 	}
 	return res, nil
@@ -96,7 +89,6 @@ func Put(url, body string, headers ...Header) (*http.Response, error) {
 	bodyBytes := strings.NewReader(body)
 	rq, err := http.NewRequest(http.MethodPut, url, bodyBytes)
 	if err != nil {
-		fclogger.Error("error while creating request", fclogger.Errs, err)
 		return nil, err
 	}
 
@@ -105,7 +97,6 @@ func Put(url, body string, headers ...Header) (*http.Response, error) {
 	}
 	res, err := http.DefaultClient.Do(rq)
 	if err != nil {
-		fclogger.Error("error while sending request", fclogger.Errs, err)
 		return nil, err
 	}
 	return res, nil
@@ -116,7 +107,6 @@ func GetWithBasicAuth(url, username, password string, headers ...Header) (*http.
 	// method := "fcrequets.GetWithBasicAuth"
 	rq, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		fclogger.Debug("error while creating request", fclogger.Errs, err)
 		return nil, err
 	}
 
@@ -127,7 +117,6 @@ func GetWithBasicAuth(url, username, password string, headers ...Header) (*http.
 
 	res, err := http.DefaultClient.Do(rq)
 	if err != nil {
-		fclogger.Debug("error while sending request", fclogger.Errs, err)
 		return nil, err
 	}
 	return res, nil
